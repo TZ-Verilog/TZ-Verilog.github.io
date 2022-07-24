@@ -57,3 +57,4 @@ weight = 30
   [markup.goldmark]
     [markup.goldmark.renderer]
         unsafe = true
+        mathjax = true
