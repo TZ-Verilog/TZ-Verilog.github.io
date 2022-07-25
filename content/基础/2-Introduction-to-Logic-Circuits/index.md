@@ -350,4 +350,165 @@ $$
 
 如果一个函数有 $n$ 个变量，则包含这 $n$ 个变量的乘积称为 **最小项（Minterm）**，变量可能是 $x_i$ 或 $\overline{x}_i$。真值表中的每一行都可以用一个最小项来表示。
 
+|行号|$x_1,x_2,x_3$|Minterm|
+|:---:|:-------------:|:--------------:|
+| 0 | 0 0 0 |$m_0=\overline{x}_1 \overline{x}_2 \overline{x}_3$|
+| 1 | 0 0 1 |$m_1=\overline{x}_1 \overline{x}_2 x_3$|
+| 2 | 0 1 0 |$m_2=\overline{x}_1 x_2 \overline{x}_3$|
+| 3 | 0 1 1 |$m_3=\overline{x}_1 x_2 x_3$|
+| 4 | 1 0 0 |$m_4=x_1 \overline{x}_2 \overline{x}_3$|
+| 5 | 1 0 1 |$m_5=x_1 \overline{x}_2 x_3$|
+| 6 | 1 1 0 |$m_6=x_1 x_2 \overline{x}_3$|
+| 7 | 1 1 1 |$m_7=x_1 x_2 x_3$|
+
+#### 积的和
+
+任何逻辑表达式可以用最小项的和来表示，即 **积的和（sum-of-products）**。如果我们给真值表的每一行编号，并将对应的最小值记为 $m_i$，则逻辑表达式 $f$ 可以用如下形式表示：
+
+$$
+f(x_1,x_2,x_3) = \sum (m_i)
+$$
+
+或
+
+$$
+f(x_1,x_2,x_3) = \sum m(i)
+$$
+
+其中，$i$ 是真值表中，$f=1$ 的行。
+
+#### 最大项
+
+根据对偶定理，如果一个逻辑表达式 $f$ 可以用真值表中 $f=1$ 的最小项的和来表示，那么也可以用真值表中 $f=0$ 的最大项的积来表示。最大项即包含所有变量的和的项，记为 $M_i$，见下表：
+
+|行号|$x_1,x_2,x_3$|Maxterm|
+|:---:|:-------------:|:--------------:|
+| 0 | 0 0 0 |$M_0=x_1+ x_2+ x_3$|
+| 1 | 0 0 1 |$M_1=x_1+ x_2+ \overline{x}_3$|
+| 2 | 0 1 0 |$M_2=x_1+ \overline{x}_2+ x_3$|
+| 3 | 0 1 1 |$M_3=x_1+ \overline{x}_2+ \overline{x}_3$|
+| 4 | 1 0 0 |$M_4=\overline{x}_1+ x_2+ x_3$|
+| 5 | 1 0 1 |$M_5=\overline{x}_1+ x_2+ \overline{x}_3$|
+| 6 | 1 1 0 |$M_6=\overline{x}_1+ \overline{x}_2+ x_3$|
+| 7 | 1 1 1 |$M_7=\overline{x}_1+ \overline{x}_2+ \overline{x}_3$|
+
+注意每一行的最大项和最小项中是相反的，比如 $m_0=\overline{x}_1 \overline{x}_2 \overline{x}_3$，$M_0=x_1+ x_2+ x_3$，满足 $m_0 = \overline{M}_0$（德·摩根定律）
+
+#### 和的积
+
+对于一个逻辑表达式 $f=\sum (m_i)$，其中 $m_i$ 为真值表中 $f=1$ 的行，则 $\overline{f}=\sum (m_j)$，$j$ 为真值表中 $f=0$ 的行。于是我们有：
+
+$$
+\overline{\overline{f}} = \sum (\overline{m}_j)
+$$
+
+根据德·摩根定理，$\overline{m_j} = M_j$，因此，我们有：
+
+$$
+f = \overline{\overline{f}} = \prod (M_j)
+$$
+
+或
+
+$$
+f= \prod M(j)
+$$
+
+其中，$j$ 为真值表中 $f=0$ 的行。
+
+#### 用与/或/非表示积的和、和的积
+
+（略）
+
+### 只包含 NAND 或 NOR 的逻辑电路
+
+上面描述了如何用与/或/非门来综合逻辑表达式，实际上，只用与非 NAND ，或只用或非 NOR，也可以实现。
+
+与非、或非相比于与、或的最大好处是，它们的底层晶体管结构更加简单。
+
+下面来描述如何只用与非/或非来实现逻辑表达式。对于一个积的和
+
+$$
+f = \sum (m_i)
+$$
+
+根据德·摩根定理，有：
+
+$$
+f = \overline{\prod (\overline{m}_i)}
+$$
+
+那么就可以只用与非来实现。用图可能更好理解：
+
+![logic circuit with nand gate](images/logic%20circuit%20with%20nand%20gate.svg)
+
+同理，对于一个和的积，我们有：
+
+$$
+\begin{align}
+  f &= \prod (M_i)\\
+    &= \overline{\sum (\overline{M}_i)}
+\end{align}
+$$
+
+![logic circuit with nor gate](images/logic%20circuit%20with%20nor%20gate.svg)
+
+对于某些最小项、最大项，可能需要对变量取反，我们也可以利用 NAND/NOR 来实现 NOT
+
+![use nand nor as not](images/use%20nand%20nor%20as%20not.svg)
+
+## 设计示例
+
+### 双输入选择器
+
+功能：两个输入 $x_1,x_2$，开关 $s$ 控制输出 $f$ 等于哪个输入，即：
+
+$$
+f = 
+\begin{cases}
+  x_1 & s=0\\
+  x_2 & s=1
+\end{cases}
+$$
+
+列出真值表：
+
+|$s,x_1,x_2$ | $f$ |
+|:--------:|:--------------:|
+| 0 0 0 | 0 |
+| 0 0 1 | 0 |
+| 0 1 0 | 1 |
+| 0 1 1 | 1 |
+| 1 0 0 | 0 |
+| 1 0 1 | 1 |
+| 1 1 0 | 0 |
+| 1 1 1 | 1 |
+
+写出积的和：
+
+$$
+f=\overline{s}x_1\overline{x}_2+\overline{s}x_1x_2+s\overline{x}_1x_2+sx_1x_2
+$$
+
+利用分配律，可以写成：
+
+$$
+\begin{align}
+  f&=\overline{s}x_1(\overline{x}_2+x_2)+sx_2(\overline{x}_1+x_1)\\
+  &=\overline{s}x_1+sx_2
+\end{align}
+$$
+
+可以推广到 $n$ 路选择器：
+
+$$
+f = \sum m_{si}x_i
+$$
+
+$m_{si}$ 为由选择信号组成的最小项，$x_i$ 为某组选择信号有效时的输出。
+
+## CAD工具简介
+
+## Verilog简介
+
 
