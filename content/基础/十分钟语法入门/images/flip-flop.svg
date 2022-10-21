@@ -1,0 +1,16 @@
+<svg width="100" height="120" xmlns="http://www.w3.org/2000/svg">
+
+ <g>
+  <title>Layer 1</title>
+  <rect id="svg_1" height="89.06235" width="68.74989" y="16.953" x="15.62506" stroke="#000" fill="#fff"/>
+  <line stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_2" y2="35.31234" x2="15.62506" y1="35.31234" x1="5.0782" stroke="#000" fill="none"/>
+  <line stroke="#000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_3" y2="35" x2="93.74993" y1="34.5311" x1="83.98432" fill="none"/>
+  <line stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_4" y2="86.48414" x2="6.6407" y1="86.48414" x1="15.62506" stroke="#000" fill="none"/>
+  <line stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_5" y2="86.48414" x2="94.53118" y1="86.48414" x1="83.98432" stroke="#000" fill="none"/>
+  <line id="svg_6" y2="86.37248" x2="22.79803" y1="78.60049" x1="15.54418" stroke="#000" fill="none"/>
+  <line id="svg_7" y2="92.07193" x2="15.54418" y1="86.37248" x1="22.79803" stroke="#000" fill="none"/>
+  <text xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="16" stroke-width="0" id="svg_8" y="41.81307" x="20.20737" stroke="#000" fill="#000000">D</text>
+  <text style="cursor: move;" xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="16" stroke-width="0" id="svg_9" y="41.03587" x="66.83931" stroke="#000" fill="#000000">Q</text>
+  <text style="cursor: move;" xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="16" stroke-width="0" id="svg_10" y="91.81287" x="26.42496" stroke="#000" fill="#000000">clock</text>
+ </g>
+</svg>
